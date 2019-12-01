@@ -1,0 +1,17 @@
+name: dart2native
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    container:
+      image:  google/dart:latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: pub get
+    - name: dart2native
+      run: dart2native main.dart -v -o out/echo_${{ runner.os }}
